@@ -21,8 +21,14 @@ createApp({
             })
         },
         signTask(index){
+            let value = null
             const data = new FormData();
-            data.append("index", index);
+            if(this.list[index].active){
+                value = false
+            }else{
+                value =true
+            }
+            data.append("index&value", JSON.stringify([index,value]));
             axios.post(this.serverUrl, data, { header: { "Content-Type": "multipart/form-data" } }).then((res) => {
                 this.list = res.data
             })

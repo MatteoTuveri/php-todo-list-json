@@ -7,8 +7,9 @@ if(isset($_POST['newTask'])){
     array_push($list, $newtask);
     file_put_contents('db.json', json_encode($list));
 }
-if(isset($_POST['index'])){
-    $list[$_POST['index']]['active']=false;
+if(isset($_POST['index&value'])){
+    $params = json_decode($_POST['index&value'], true);
+    $list[$params[0]]['active']=$params[1];
     file_put_contents('db.json', json_encode($list));
 }
 header('Content-Type: application/json');
