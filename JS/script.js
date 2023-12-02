@@ -4,7 +4,7 @@ createApp({
         return {
             serverUrl: 'server.php',
             list: [],
-            newTask: ''
+            newTask: { text:'',active:true}
         };
     },
     methods: {
@@ -15,7 +15,14 @@ createApp({
         },
         postItem() {
             const data = new FormData();
-            data.append("newTask", this.newTask);
+            data.append("newTask", JSON.stringify(this.newTask));
+            axios.post(this.serverUrl, data, { header: { "Content-Type": "multipart/form-data" } }).then((res) => {
+                this.list = res.data
+            })
+        },
+        signTask(index){
+            const data = new FormData();
+            data.append("index", index);
             axios.post(this.serverUrl, data, { header: { "Content-Type": "multipart/form-data" } }).then((res) => {
                 this.list = res.data
             })

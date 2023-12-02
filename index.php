@@ -17,11 +17,11 @@
             <div class="container">
                 <h1>To Do List</h1>
                 <ul class="list-group mb-3">
-                    <li v-for="item in list" class="list-group-item">{{item}}</li>
+                    <li v-for="(item,index) in list" class="list-group-item" :class="(item.active)? '':'text-decoration-line-through'" @click="signTask(index)">{{item.text}}</li>
                 </ul>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="New Task"
-                        aria-label="Recipient's username" aria-describedby="button-addon2" v-model="newTask">
+                        aria-label="Recipient's username" aria-describedby="button-addon2" v-model="newTask.text">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="postItem">Add</button>
                 </div>
             </div>
